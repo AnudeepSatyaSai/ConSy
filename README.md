@@ -13,7 +13,7 @@ ConvoSynth is an AI-powered tool that converts speech input into a dynamic conve
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/ConvoSynth.git
+    git clone https://github.com/AnudeepSatyaSai/ConvoSynth.git
     cd ConvoSynth
     ```
 
