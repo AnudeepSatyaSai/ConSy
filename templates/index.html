@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConSy - Conversational AI Assistant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <h1>ConSy</h1>
+                </div>
+                <p class="subtitle">Conversational AI Assistant</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Audio Input Section -->
+            <section class="audio-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-microphone upload-icon"></i>
+                        <h3>Upload Audio or Record</h3>
+                        <p>Drop an audio file here or click to browse</p>
+                        <input type="file" id="audioFile" accept="audio/*" hidden>
+                        <div class="upload-buttons">
+                            <button class="btn btn-primary" id="browseBtn">
+                                <i class="fas fa-folder-open"></i> Browse Files
+                            </button>
+                            <button class="btn btn-secondary" id="recordBtn">
+                                <i class="fas fa-microphone"></i> Record Audio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recording Interface -->
+                <div class="recording-interface" id="recordingInterface" style="display: none;">
+                    <div class="recording-controls">
+                        <button class="btn btn-danger record-control" id="startRecord">
+                            <i class="fas fa-circle"></i> Start Recording
+                        </button>
+                        <button class="btn btn-warning record-control" id="stopRecord" style="display: none;">
+                            <i class="fas fa-stop"></i> Stop Recording
+                        </button>
+                        <button class="btn btn-secondary" id="cancelRecord">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                    <div class="recording-status" id="recordingStatus"></div>
+                </div>
+
+                <!-- Audio Preview -->
+                <div class="audio-preview" id="audioPreview" style="display: none;">
+                    <h4>Audio Preview</h4>
+                    <audio controls id="previewAudio"></audio>
+                    <div class="preview-actions">
+                        <button class="btn btn-success" id="processBtn">
+                            <i class="fas fa-play"></i> Process with ConSy
+                        </button>
+                        <button class="btn btn-secondary" id="clearBtn">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Status -->
+            <section class="status-section" id="statusSection" style="display: none;">
+                <div class="status-content">
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <h3 id="statusTitle">Processing Audio...</h3>
+                    <p id="statusMessage">ConSy is analyzing your audio and generating a response.</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h3>ConSy Response</h3>
+                <div class="result-content">
+                    <audio controls id="resultAudio"></audio>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" id="downloadBtn">
+                            <i class="fas fa-download"></i> Download Response
+                        </button>
+                        <button class="btn btn-secondary" id="newConversationBtn">
+                            <i class="fas fa-plus"></i> New Conversation
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conversation History -->
+            <section class="history-section">
+                <div class="history-header">
+                    <h3><i class="fas fa-history"></i> Conversation History</h3>
+                    <button class="btn btn-outline" id="clearHistoryBtn">
+                        <i class="fas fa-trash"></i> Clear History
+                    </button>
+                </div>
+                <div class="history-content" id="historyContent">
+                    <p class="no-history">No conversations yet. Start by uploading an audio file!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 ConSy - Conversational AI Assistant</p>
+        </footer>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal" id="errorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Error</h3>
+                <button class="modal-close" id="closeError">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="errorMessage"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
